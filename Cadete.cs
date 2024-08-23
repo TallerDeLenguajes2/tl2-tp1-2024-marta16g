@@ -16,6 +16,11 @@ namespace EspacioCadete
         public ulong Telefono { get => telefono; set => telefono = value; }
         public List<Pedido> ListadoDePedidos { get => listadoDePedidos; set => listadoDePedidos = value; }
 
+        public int JornalACobrar()
+        { 
+            return listadoDePedidos.Count() * 500;
+        }
+
         public Cadete(string nombre, string direccion, ulong telefono)
         {
             id++;
