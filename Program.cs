@@ -1,2 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using EspacioCadete;
+using EspacioCadeteria;
+using EspacioCliente;
+using EspacioPedido;
+
+class Program
+{
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("BIENVENIDO");
+        Console.WriteLine("Ingrese nombre de su restaurant");
+    }
+}
+
+
