@@ -2,7 +2,7 @@ using System;
 
 namespace EspacioCliente
 {
-    public class EspacioCliente
+    public class Cliente
     {
         private string nombre;
         private ulong telefono;
