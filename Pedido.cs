@@ -8,12 +8,12 @@ namespace EspacioPedido
         private int nro;
         private string obs;
         private Cliente cliente;
-        private EstadoPedido estado;
+        private EnumPedido estado;
 
         public int Nro { get => nro; set => nro = value; }
         public string Obs { get => obs; set => obs = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
-        public EstadoPedido Estado { get => estado; set => estado = value; }
+        public EnumPedido Estado { get => estado; set => estado = value; }
 
         public string VerDireccionCliente()
         {
@@ -28,7 +28,7 @@ namespace EspacioPedido
             $"Dirección: {this.VerDireccionCliente()}");
         }
 
-        public Pedido(int nro, string obs, string nombre, ulong telefono, string direccion, string datosReferenciaDireccion, EstadoPedido estado)
+        public Pedido(int nro, string obs, string nombre, ulong telefono, string direccion, string datosReferenciaDireccion, EnumPedido estado)
         {
             this.nro = nro;
             this.obs = obs;
@@ -36,7 +36,7 @@ namespace EspacioPedido
             this.estado = estado; 
         }
     }
-    public enum EstadoPedido
+    public enum EnumPedido
     {
         Pendiente,
         EnProceso,

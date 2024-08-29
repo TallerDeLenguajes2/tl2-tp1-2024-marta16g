@@ -7,8 +7,13 @@ class Program
 {
     private static void Main(string[] args)
     {
+        Cadeteria cadeteria = new Cadeteria();
+        cadeteria.Nombre = "Pedidos Ya";
+        cadeteria.Numero = 12345;
         Console.WriteLine("BIENVENIDO");
-        Console.WriteLine("Ingrese nombre de su restaurant");
+        Console.WriteLine(cadeteria.Nombre);
+
+
     }
 }
 

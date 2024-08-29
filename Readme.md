@@ -11,7 +11,7 @@ agregación?
 
 3. Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos,
 propiedades y métodos deberían ser públicos y cuáles privados.
--  
+-  Las propiedades de cliente deberían ser todas privadas para un flujo de datos más controlado.
 
 4. ¿Cómo diseñaría los constructores de cada una de las clases?
 5. ¿Se le ocurre otra forma que podría haberse realizado el diseño de clases?
