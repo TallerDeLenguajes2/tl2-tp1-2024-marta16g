@@ -17,7 +17,7 @@ namespace EspacioPedido
 
         public string VerDireccionCliente()
         {
-            return($"{Cliente.Direccion}");
+            return($"Dirección del cliente: {cliente.Direccion}");
         }
 
         public string VerDatosCliente()
@@ -28,11 +28,11 @@ namespace EspacioPedido
             $"Dirección: {this.VerDireccionCliente()}");
         }
 
-        public Pedido(int nro, string obs, Cliente cliente, int estado)
+        public Pedido(int nro, string obs, string nombre, ulong telefono, string direccion, string datosReferenciaDireccion, int estado)
         {
             this.nro = nro;
             this.obs = obs;
-            this.cliente = cliente;
+            this.cliente = new Cliente(nombre, telefono, direccion, datosReferenciaDireccion);
             this.estado = estado; 
         }
     }
