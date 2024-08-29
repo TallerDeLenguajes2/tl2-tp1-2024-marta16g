@@ -8,16 +8,16 @@ namespace EspacioPedido
         private int nro;
         private string obs;
         private Cliente cliente;
-        private int estado;
+        private EstadoPedido estado;
 
         public int Nro { get => nro; set => nro = value; }
         public string Obs { get => obs; set => obs = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
-        public int Estado { get => estado; set => estado = value; }
+        public EstadoPedido Estado { get => estado; set => estado = value; }
 
         public string VerDireccionCliente()
         {
-            return($"Dirección del cliente: {cliente.Direccion}");
+            return($"{cliente.Direccion}");
         }
 
         public string VerDatosCliente()
@@ -28,12 +28,19 @@ namespace EspacioPedido
             $"Dirección: {this.VerDireccionCliente()}");
         }
 
-        public Pedido(int nro, string obs, string nombre, ulong telefono, string direccion, string datosReferenciaDireccion, int estado)
+        public Pedido(int nro, string obs, string nombre, ulong telefono, string direccion, string datosReferenciaDireccion, EstadoPedido estado)
         {
             this.nro = nro;
             this.obs = obs;
             this.cliente = new Cliente(nombre, telefono, direccion, datosReferenciaDireccion);
             this.estado = estado; 
         }
+    }
+    public enum EstadoPedido
+    {
+        Pendiente,
+        EnProceso,
+        Completado,
+        Cancelado
     }
 }
