@@ -10,8 +10,11 @@ class Program
     private static void Main(string[] args)
     {
         Gestion gestion = new Gestion();
-        gestion.Comienzo();
-        Console.WriteLine("holsa");
+        int opcion = gestion.MostrarMenu();
+        if(opcion == 1)
+        {
+            gestion.VerPedidos();
+        }
     }
 }
 
