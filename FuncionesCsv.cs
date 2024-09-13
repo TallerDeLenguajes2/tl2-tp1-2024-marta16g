@@ -5,9 +5,9 @@ using System.Text;
 
 namespace EspacioFuncionesCsv
 {
-    public class EspacioFuncionesCsv
+    public class FuncionesCsv
     {
-        public List<string[]> LeerArchivos(string nombreArchivo, char caracter)
+        public static List<string[]> LeerArchivos(string nombreArchivo, char caracter)
         {
             List<string[]> archivoLeido = new();
             string? linea = "";
