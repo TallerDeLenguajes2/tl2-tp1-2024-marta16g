@@ -28,5 +28,17 @@ namespace EspacioGestion
                 }
             }
         }
+        public void verCadetes()
+        {
+            List<string[]> listaCadetes = new();
+            listaCadetes = FuncionesCsv.LeerArchivos("Cadetes.csv", ',');
+            for (int i = 0; i < listaCadetes.Count; i++)
+            {
+                for (int j = 0; j < listaCadetes[i].Length; j++)
+                {
+                    Console.WriteLine(listaCadetes[i][j]);
+                }
+            }
+        }
     }
 }
