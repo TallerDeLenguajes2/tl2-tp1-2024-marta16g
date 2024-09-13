@@ -8,10 +8,16 @@ agregación?
 
 2. ¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?
 - Ambas clases deberían tener métodos que permitan agregar a sus campos listas sus respectivos objetos de forma ordenada.
+- Cadetería debería tener algun método que le permita asignar pedidos a cadetes y listar pedidos según su estado.
+- Cadete debería poder eliminar cadetes del sistema y cambiar el estado de un pedido.
 
 3. Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos,
 propiedades y métodos deberían ser públicos y cuáles privados.
--  Las propiedades de cliente deberían ser todas privadas para un flujo de datos más controlado.
+-  Todas las propiedades deberían ser privadas para un mejor control y seguridad en el flujo de datos.
 
 4. ¿Cómo diseñaría los constructores de cada una de las clases?
+- Con sobrecarga de datos.
+- El constructor de cadetería puede empezar con datos iniciales como nombre y número.
+
 5. ¿Se le ocurre otra forma que podría haberse realizado el diseño de clases?
+- 
