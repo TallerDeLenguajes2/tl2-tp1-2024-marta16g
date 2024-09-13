@@ -2,18 +2,16 @@
 using EspacioCadeteria;
 using EspacioCliente;
 using EspacioPedido;
+using EspacioFuncionesCsv;
+using EspacioGestion;
 
 class Program
 {
     private static void Main(string[] args)
     {
-        Cadeteria cadeteria = new Cadeteria();
-        cadeteria.Nombre = "Pedidos Ya";
-        cadeteria.Numero = 12345;
-        Console.WriteLine("BIENVENIDO");
-        Console.WriteLine(cadeteria.Nombre);
-
-
+        Gestion gestion = new Gestion();
+        gestion.Comienzo();
+        Console.WriteLine("holsa");
     }
 }
 
