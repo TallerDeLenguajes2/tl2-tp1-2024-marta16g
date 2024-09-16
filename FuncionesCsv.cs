@@ -49,7 +49,7 @@ namespace EspacioFuncionesCsv
             return misCadetes;
         }
 
-        public static List<Pedido> ConvertirPedido(List<string[]> Filas)
+        public static List<Pedido> ConvertirPedidos(List<string[]> Filas)
         {
             List<Pedido> misPedidos = new List<Pedido>();
             foreach (string[] fila in Filas)

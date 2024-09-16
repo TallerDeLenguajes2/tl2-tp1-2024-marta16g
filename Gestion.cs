@@ -60,7 +60,7 @@ namespace EspacioGestion
             string observacion = Console.ReadLine();
 
 
-            List<Pedido> pedidosCsv = FuncionesCsv.ConvertirPedido(FuncionesCsv.LeerArchivos("csv/Pedidos.csv", ','));
+            List<Pedido> pedidosCsv = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos("csv/Pedidos.csv", ','));
             if (pedidosCsv == null || pedidosCsv.Count == 0)
             {
                 Console.WriteLine("viene vacío");
