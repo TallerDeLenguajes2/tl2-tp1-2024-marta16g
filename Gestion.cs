@@ -58,21 +58,28 @@ namespace EspacioGestion
             string detalles = Console.ReadLine();
             Console.WriteLine("Escriba la observacion");
             string observacion = Console.ReadLine();
-            
+
 
             List<Pedido> pedidosCsv = FuncionesCsv.ConvertirPedido(FuncionesCsv.LeerArchivos("csv/Pedidos.csv", ','));
-            int ultimoNum = pedidosCsv.Last().Nro;
+            if (pedidosCsv == null || pedidosCsv.Count == 0)
+            {
+                Console.WriteLine("viene vacío");
+            }
+            else
+            {
+                int ultimoNum = pedidosCsv.Last().Nro;
 
-            Pedido nuevoPedido = new Pedido(ultimoNum++, observacion, nombre, ulong.Parse(telefono), direccion, detalles, (EnumPedido)1);
+                Pedido nuevoPedido = new Pedido(ultimoNum + 1, observacion, nombre, ulong.Parse(telefono), direccion, detalles, EnumPedido.Pendiente);
 
-            FuncionesCsv.AgregarLinea("csv/Pedidos.csv", FuncionesCsv.CrearLineaDePedidos(nuevoPedido));
-            Console.WriteLine("Pedido dado en alta exitósamente");
-            
+                FuncionesCsv.AgregarLinea("csv/Pedidos.csv", FuncionesCsv.CrearLineaDePedidos(nuevoPedido));
+                Console.WriteLine("Pedido dado en alta exitósamente");
+            }
+
         }
 
         public void AsignarPedidoACadete(int id, Pedido pedido)
         {
-            List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("csv/Cadete.csv", ','));
+            List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("csv/Cadetes.csv", ','));
             Cadete cadeteEncontrado = listaCadetes.Find(cad => cad.Id == id);
             if (cadeteEncontrado != null)
             {
@@ -82,7 +89,7 @@ namespace EspacioGestion
         public void VerPedidos()
         {
             List<string[]> listaPedidos = new();
-            listaPedidos = FuncionesCsv.LeerArchivos("csv/Pedido.csv", ',');
+            listaPedidos = FuncionesCsv.LeerArchivos("csv/Pedidos.csv", ',');
             for (int i = 0; i < listaPedidos.Count; i++)
             {
                 for (int j = 0; j < listaPedidos[i].Length; j++)
@@ -94,7 +101,7 @@ namespace EspacioGestion
         public void VerCadetes()
         {
             List<Cadete> listaCadetes = new();
-            listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("csv/Cadete.csv", ','));
+            listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("csv/Cadetes.csv", ','));
             foreach (Cadete cad in listaCadetes)
             {
                 Console.WriteLine($"--CADETE--\n Id: {cad.Id} \n Nombre: {cad.Nombre} \n Teléfono: {cad.Telefono} \n Dirección: {cad.Direccion}");
