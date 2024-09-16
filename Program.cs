@@ -10,10 +10,15 @@ class Program
     private static void Main(string[] args)
     {
         Gestion gestion = new Gestion();
-        int opcion = gestion.MostrarMenu();
-        if(opcion == 1)
+        Console.WriteLine("BIENVENIDO");
+        gestion.MostrarMenu();
+        Console.WriteLine("Elija la operación:");
+        string input = Console.ReadLine();
+        if(gestion.ValidarEntrada(input, 0, 5))
         {
-            gestion.VerPedidos();
+
+        }else{
+            
         }
     }
 }
