@@ -54,8 +54,8 @@ namespace EspacioFuncionesCsv
             List<Pedido> misPedidos = new List<Pedido>();
             foreach (string[] fila in Filas)
             {
-               Pedido ped = new Pedido(int.Parse(fila[0]), fila[1], fila[2], ulong.Parse(fila[3]), fila[4], fila[5], (EnumPedido)Enum.Parse(typeof(EnumPedido), fila[6]));
-               misPedidos.Add(ped);
+                Pedido ped = new Pedido(int.Parse(fila[0]), fila[1], fila[2], ulong.Parse(fila[3]), fila[4], fila[5], (EnumPedido)Enum.Parse(typeof(EnumPedido), fila[6]));
+                misPedidos.Add(ped);
             }
             return misPedidos;
         }
@@ -64,6 +64,17 @@ namespace EspacioFuncionesCsv
         {
             string linea = $"{pedido.Nro.ToString()},{pedido.Obs},{pedido.Cliente.Nombre},{pedido.Cliente.Telefono.ToString()},{pedido.Cliente.Direccion},{pedido.Cliente.DatosReferenciaDireccion},{pedido.Estado.ToString()}";
             return linea;
+        }
+        public static void ReescribirArchivoCsv(List<Pedido> pedidos, string nombreArchivo)
+        {
+            using (StreamWriter sw = new StreamWriter(nombreArchivo, false))
+            {
+                foreach (var pedido in pedidos)
+                {
+                    string linea = FuncionesCsv.CrearLineaDePedidos(pedido);
+                    sw.WriteLine(linea);
+                }
+            }
         }
     }
 }
