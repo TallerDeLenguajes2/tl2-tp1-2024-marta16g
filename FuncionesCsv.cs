@@ -40,13 +40,23 @@ namespace EspacioFuncionesCsv
 
         public static List<Cadete> ConvertirCadete(List<string[]> Filas)
         {
-            List<Cadete> MisCadetes = new List<Cadete>();
-            foreach (string[] filas in Filas)
+            List<Cadete> misCadetes = new List<Cadete>();
+            foreach (string[] fila in Filas)
             {
-                Cadete cad = new Cadete(int.Parse(filas[0]), filas[1], filas[2], ulong.Parse(filas[3]));
-                MisCadetes.Add(cad);
+                Cadete cad = new Cadete(int.Parse(fila[0]), fila[1], fila[2], ulong.Parse(fila[3]));
+                misCadetes.Add(cad);
             }
-            return MisCadetes;
+            return misCadetes;
+        }
+
+        public static List<Pedido> ConvertirPedido(List<string[]> Filas)
+        {
+            List<Pedido> misPedidos = new List<Pedido>();
+            foreach (string[] fila in Filas)
+            {
+               Pedido ped = new Pedido(int.Parse(fila[0]), fila[1], fila[2], ulong.Parse(fila[3]), fila[4], fila[5], (EnumPedido)Enum.Parse(typeof(EnumPedido), fila[6]));
+            }
+            return misPedidos;
         }
     }
 }
