@@ -11,7 +11,9 @@ class Program
     {
         int operacion = 0;
         Gestion gestion = new Gestion();
+
         Console.WriteLine("BIENVENIDO");
+ 
         do
         {
             gestion.MostrarMenu();
@@ -19,6 +21,8 @@ class Program
             string input = Console.ReadLine();
             operacion = Gestion.ValidarEntrada(input, 0, 5);
         } while (operacion == 0);
+
+        gestion.ManejoDeOperaciones(operacion);
         
     }
 }
