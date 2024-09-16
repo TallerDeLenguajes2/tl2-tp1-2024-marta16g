@@ -55,22 +55,13 @@ namespace EspacioFuncionesCsv
             foreach (string[] fila in Filas)
             {
                Pedido ped = new Pedido(int.Parse(fila[0]), fila[1], fila[2], ulong.Parse(fila[3]), fila[4], fila[5], (EnumPedido)Enum.Parse(typeof(EnumPedido), fila[6]));
+               misPedidos.Add(ped);
             }
             return misPedidos;
         }
 
         public static string CrearLineaDePedidos(Pedido pedido)
         {
-            // string[] linea = [];
-
-            // linea[0] = (pedido.Nro).ToString();
-            // linea[1] = pedido.Obs;
-            // linea[2] = pedido.Cliente.Nombre;
-            // linea[3] = pedido.Cliente.Telefono.ToString();
-            // linea[4] = pedido.Cliente.Direccion;
-            // linea[5] = pedido.Cliente.DatosReferenciaDireccion;
-            // linea[6] = pedido.Estado.ToString();
-
             string linea = $"{pedido.Nro.ToString()},{pedido.Obs},{pedido.Cliente.Nombre},{pedido.Cliente.Telefono.ToString()},{pedido.Cliente.Direccion},{pedido.Cliente.DatosReferenciaDireccion},{pedido.Estado.ToString()}";
             return linea;
         }
