@@ -38,9 +38,9 @@ namespace EspacioPedido
     }
     public enum EnumPedido
     {
-        Pendiente,
-        EnProceso,
-        Completado,
-        Cancelado
+        Pendiente = 1,
+        EnProceso = 2,
+        Completado = 3,
+        Cancelado = 4
     }
 }
