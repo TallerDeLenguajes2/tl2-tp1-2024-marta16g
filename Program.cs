@@ -9,17 +9,17 @@ class Program
 {
     private static void Main(string[] args)
     {
+        int operacion = 0;
         Gestion gestion = new Gestion();
         Console.WriteLine("BIENVENIDO");
-        gestion.MostrarMenu();
-        Console.WriteLine("Elija la operación:");
-        string input = Console.ReadLine();
-        if(gestion.ValidarEntrada(input, 0, 5))
+        do
         {
-
-        }else{
-            
-        }
+            gestion.MostrarMenu();
+            Console.WriteLine("Elija la operación:");
+            string input = Console.ReadLine();
+            operacion = Gestion.ValidarEntrada(input, 0, 5);
+        } while (operacion == 0);
+        
     }
 }
 
