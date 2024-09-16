@@ -48,12 +48,31 @@ namespace EspacioGestion
         public void DarDeAltaPedido()
         {
             VerPedidos();
-            Console.WriteLine("Escriba");
+            Console.WriteLine("Escriba el nombre del cliente");
+            string nombre = Console.ReadLine();
+            Console.WriteLine("Escriba el teléfono del cliente");
+            string telefono = Console.ReadLine();
+            Console.WriteLine("Escriba la dirección del cliente");
+            string direccion = Console.ReadLine();
+            Console.WriteLine("Escriba detalles de la dirección");
+            string detalles = Console.ReadLine();
+            Console.WriteLine("Escriba la observacion");
+            string observacion = Console.ReadLine();
+            
+
+            List<Pedido> pedidosCsv = FuncionesCsv.ConvertirPedido(FuncionesCsv.LeerArchivos("csv/Pedidos.csv", ','));
+            int ultimoNum = pedidosCsv.Last().Nro;
+
+            Pedido nuevoPedido = new Pedido(ultimoNum++, observacion, nombre, ulong.Parse(telefono), direccion, detalles, (EnumPedido)1);
+
+            FuncionesCsv.AgregarLinea("csv/Pedidos.csv", FuncionesCsv.CrearLineaDePedidos(nuevoPedido));
+            Console.WriteLine("Pedido dado en alta exitósamente");
+            
         }
 
         public void AsignarPedidoACadete(int id, Pedido pedido)
         {
-            List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("Cadete.csv", ','));
+            List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("csv/Cadete.csv", ','));
             Cadete cadeteEncontrado = listaCadetes.Find(cad => cad.Id == id);
             if (cadeteEncontrado != null)
             {
@@ -63,7 +82,7 @@ namespace EspacioGestion
         public void VerPedidos()
         {
             List<string[]> listaPedidos = new();
-            listaPedidos = FuncionesCsv.LeerArchivos("Pedido.csv", ',');
+            listaPedidos = FuncionesCsv.LeerArchivos("csv/Pedido.csv", ',');
             for (int i = 0; i < listaPedidos.Count; i++)
             {
                 for (int j = 0; j < listaPedidos[i].Length; j++)
@@ -72,16 +91,13 @@ namespace EspacioGestion
                 }
             }
         }
-        public void verCadetes()
+        public void VerCadetes()
         {
-            List<string[]> listaCadetes = new();
-            listaCadetes = FuncionesCsv.LeerArchivos("Cadetes.csv", ',');
-            for (int i = 0; i < listaCadetes.Count; i++)
+            List<Cadete> listaCadetes = new();
+            listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("csv/Cadete.csv", ','));
+            foreach (Cadete cad in listaCadetes)
             {
-                for (int j = 0; j < listaCadetes[i].Length; j++)
-                {
-                    Console.WriteLine(listaCadetes[i][j]);
-                }
+                Console.WriteLine($"--CADETE--\n Id: {cad.Id} \n Nombre: {cad.Nombre} \n Teléfono: {cad.Telefono} \n Dirección: {cad.Direccion}");
             }
         }
     }
