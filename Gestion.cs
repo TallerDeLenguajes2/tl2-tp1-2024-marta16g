@@ -35,14 +35,13 @@ namespace EspacioGestion
         {
             switch (operacion)
             {
-                case 1:
-                    DarDeAltaPedido();
+                case 1: DarDeAltaPedido();
                     break;
                 case 2:
                     break;
                 case 3:
                     break;
-                case 4:
+                case 4: CambiarEstadoAPedido();
                     break;
             }
         }
@@ -73,7 +72,7 @@ namespace EspacioGestion
                 Pedido nuevoPedido = new Pedido(ultimoNum + 1, observacion, nombre, ulong.Parse(telefono), direccion, detalles, EnumPedido.Pendiente);
 
                 FuncionesCsv.AgregarLinea(rutaPedidos, FuncionesCsv.CrearLineaDePedidos(nuevoPedido));
-                Console.WriteLine("Pedido dado en alta exitósamente");
+                Console.WriteLine("Pedido dado en alta exitosamente");
             }
 
         }
@@ -93,9 +92,28 @@ namespace EspacioGestion
             Console.WriteLine("Operación: Cambiar estado del pedido");
             Console.WriteLine("Ingrese id del pedido");
             string id = Console.ReadLine();
-            int.Parse(id);
 
             List<Pedido> listaPedidos = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos(rutaPedidos, ','));
+            Pedido pedidoEncontrado = listaPedidos.Find(ped => ped.Nro == int.Parse(id));
+            if (pedidoEncontrado == null)
+            {
+                Console.WriteLine("No se pudo encontrar el pedido");
+            }
+            else
+            {
+                int estadoNum = 0;
+                do
+                {
+                    Console.WriteLine("Elija el nuevo estado: 1) Pendiente, 2) En proceso, 3) Completado, 4) Cancelado");
+                    string estado = Console.ReadLine();
+                    estadoNum = int.Parse(estado);
+                }while(estadoNum < 1 || estadoNum > 4);
+                pedidoEncontrado.Estado = (EnumPedido)estadoNum;
+
+                FuncionesCsv.ReescribirArchivoCsv(listaPedidos, rutaPedidos);
+                Console.WriteLine("Estado modificado exitosamente");
+
+            }
         }
         public void VerPedidos()
         {
