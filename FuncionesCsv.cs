@@ -44,7 +44,7 @@ namespace EspacioFuncionesCsv
             foreach (string[] i in Fila)
             {
                 miCadeteria.Nombre = i[0];
-                miCadeteria.Numero = ulong.Parse(i[0]);
+                miCadeteria.Numero = ulong.Parse(i[1]);
             }
 
             return miCadeteria;

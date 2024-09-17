@@ -1,5 +1,6 @@
 using System;
 using EspacioCadete;
+using EspacioCadeteria;
 using EspacioFuncionesCsv;
 using EspacioPedido;
 
@@ -9,7 +10,15 @@ namespace EspacioGestion
     {
         const string rutaPedidos = "csv/Pedidos.csv";
         const string rutaCadetes = "csv/Cadetes.csv";
-        const string rutaCadeteria = "csv/Cadeteria";
+        const string rutaCadeteria = "csv/Cadeteria.csv";
+        Cadeteria miCadeteria = FuncionesCsv.ConvertirCadeteria(FuncionesCsv.LeerArchivos(rutaCadeteria, ','));
+        List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos(rutaCadetes, ','));
+
+        public void Inicializar()
+        {
+            miCadeteria.ListaCadetes = listaCadetes;
+        }
+
         public static int ValidarEntrada(string input, int min, int max)
         {
             if (int.TryParse(input, out int operacion) && operacion < max && operacion > min)
@@ -35,20 +44,25 @@ namespace EspacioGestion
         {
             switch (operacion)
             {
-                case 1: DarDeAltaPedido();
+                case 1:
+                    DarDeAltaPedido();
                     break;
-                case 2: AsignarPedidoACadete();
+                case 2:
+                    AsignarPedidoACadete();
                     break;
                 case 3:
+                    ReasignarPedidoACadete();
                     break;
                 case 4:
                     CambiarEstadoAPedido();
                     break;
             }
+
         }
 
         public void DarDeAltaPedido()
         {
+            Console.WriteLine("Operación: Dar de alta un pedido");
             Console.WriteLine("Escriba el nombre del cliente");
             string nombre = Console.ReadLine();
             Console.WriteLine("Escriba el teléfono del cliente");
@@ -81,7 +95,6 @@ namespace EspacioGestion
         public void AsignarPedidoACadete()
         {
             List<Pedido> listaPedidos = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos(rutaPedidos, ','));
-            List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos(rutaCadetes, ','));
 
             Console.WriteLine("Operación: Asignar pedido a cadete");
             Console.WriteLine("Ingrese el id del cadete");
@@ -89,7 +102,7 @@ namespace EspacioGestion
             Console.WriteLine("Ingrese el id del pedido");
             string idPedido = Console.ReadLine();
 
-            Cadete cadeteEncontrado = listaCadetes.Find(cad => cad.Id == int.Parse(idCadete));
+            Cadete cadeteEncontrado = miCadeteria.ListaCadetes.Find(cad => cad.Id == int.Parse(idCadete));
             if (cadeteEncontrado != null)
             {
                 Pedido pedidoEncontrado = listaPedidos.Find(ped => ped.Nro == int.Parse(idPedido));
@@ -97,16 +110,47 @@ namespace EspacioGestion
                 {
                     cadeteEncontrado.ListadoDePedidos.Add(pedidoEncontrado);
                     Console.WriteLine($"Se le asignó a {cadeteEncontrado.Nombre} el pedido número {pedidoEncontrado.Nro} exitosamente");
-                }else
+                }
+                else
                 {
                     Console.WriteLine("Id de pedido no encotrado");
                 }
-            }else
+            }
+            else
             {
                 Console.WriteLine("Id de cadete no encontrado");
             }
         }
 
+        public void ReasignarPedidoACadete()
+        {
+            Console.WriteLine("Operación: Reasignar pedido a cadete");
+            Console.WriteLine("Escriba el id del cadete cuyo pedido quiere mover");
+            string idCadete1 = Console.ReadLine();
+            Cadete cadete1 = miCadeteria.ListaCadetes.Find(cad => cad.Id == int.Parse(idCadete1));
+            if (cadete1 != null)
+            {
+                Console.WriteLine("Ingrese el id del pedido");
+                string idPedido = Console.ReadLine();
+                Pedido pedidoEncontrado = cadete1.ListadoDePedidos.Find(ped => ped.Nro == int.Parse(idPedido));
+                if (pedidoEncontrado != null)
+                {
+                    Console.WriteLine("Escriba el id del nuevo cadete");
+                    string idCadete2 = Console.ReadLine();
+                    Cadete cadete2 = miCadeteria.ListaCadetes.Find(cad => cad.Id == int.Parse(idCadete2));
+                    if (cadete2 != null)
+                    {
+                        cadete2.ListadoDePedidos.Add(pedidoEncontrado);
+                        cadete1.ListadoDePedidos.Remove(pedidoEncontrado);
+                        Console.WriteLine("Reasignación exitosa");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No se encontró el pedido che");
+                }
+            }
+        }
         public void CambiarEstadoAPedido()
         {
             Console.WriteLine("Operación: Cambiar estado del pedido");

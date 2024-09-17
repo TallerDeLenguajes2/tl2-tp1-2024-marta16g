@@ -9,11 +9,11 @@ class Program
 {
     private static void Main(string[] args)
     {
-        int operacion = 0;
         Gestion gestion = new Gestion();
-
+        gestion.Inicializar();
         Console.WriteLine("BIENVENIDO");
- 
+
+        int operacion;
         do
         {
             gestion.MostrarMenu();
