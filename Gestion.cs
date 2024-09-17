@@ -37,11 +37,12 @@ namespace EspacioGestion
             {
                 case 1: DarDeAltaPedido();
                     break;
-                case 2:
+                case 2: AsignarPedidoACadete();
                     break;
                 case 3:
                     break;
-                case 4: CambiarEstadoAPedido();
+                case 4:
+                    CambiarEstadoAPedido();
                     break;
             }
         }
@@ -77,13 +78,32 @@ namespace EspacioGestion
 
         }
 
-        public void AsignarPedidoACadete(int id, Pedido pedido)
+        public void AsignarPedidoACadete()
         {
+            List<Pedido> listaPedidos = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos(rutaPedidos, ','));
             List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos(rutaCadetes, ','));
-            Cadete cadeteEncontrado = listaCadetes.Find(cad => cad.Id == id);
+
+            Console.WriteLine("Operación: Asignar pedido a cadete");
+            Console.WriteLine("Ingrese el id del cadete");
+            string idCadete = Console.ReadLine();
+            Console.WriteLine("Ingrese el id del pedido");
+            string idPedido = Console.ReadLine();
+
+            Cadete cadeteEncontrado = listaCadetes.Find(cad => cad.Id == int.Parse(idCadete));
             if (cadeteEncontrado != null)
             {
-                cadeteEncontrado.ListadoDePedidos.Add(pedido);
+                Pedido pedidoEncontrado = listaPedidos.Find(ped => ped.Nro == int.Parse(idPedido));
+                if (pedidoEncontrado != null)
+                {
+                    cadeteEncontrado.ListadoDePedidos.Add(pedidoEncontrado);
+                    Console.WriteLine($"Se le asignó a {cadeteEncontrado.Nombre} el pedido número {pedidoEncontrado.Nro} exitosamente");
+                }else
+                {
+                    Console.WriteLine("Id de pedido no encotrado");
+                }
+            }else
+            {
+                Console.WriteLine("Id de cadete no encontrado");
             }
         }
 
@@ -107,7 +127,7 @@ namespace EspacioGestion
                     Console.WriteLine("Elija el nuevo estado: 1) Pendiente, 2) En proceso, 3) Completado, 4) Cancelado");
                     string estado = Console.ReadLine();
                     estadoNum = int.Parse(estado);
-                }while(estadoNum < 1 || estadoNum > 4);
+                } while (estadoNum < 1 || estadoNum > 4);
                 pedidoEncontrado.Estado = (EnumPedido)estadoNum;
 
                 FuncionesCsv.ReescribirArchivoCsv(listaPedidos, rutaPedidos);
