@@ -38,15 +38,16 @@ namespace EspacioFuncionesCsv
                 }
             }
         }
-        public static Cadeteria ConvertirCadeteria(string[]Fila)
+        public static Cadeteria ConvertirCadeteria(List<string[]> Fila)
         {
             Cadeteria miCadeteria = new Cadeteria();
-
-            miCadeteria.Nombre = Fila[0];
-            miCadeteria.Numero = ulong.Parse(Fila[0]);
+            foreach (string[] i in Fila)
+            {
+                miCadeteria.Nombre = i[0];
+                miCadeteria.Numero = ulong.Parse(i[0]);
+            }
 
             return miCadeteria;
-
         }
 
         public static List<Cadete> ConvertirCadete(List<string[]> Filas)
