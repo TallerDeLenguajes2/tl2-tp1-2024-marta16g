@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using EspacioPedido;
 using EspacioCadete;
+using EspacioCadeteria;
 
 namespace EspacioFuncionesCsv
 {
@@ -36,6 +37,16 @@ namespace EspacioFuncionesCsv
                     escritor.WriteLine(linea);
                 }
             }
+        }
+        public static Cadeteria ConvertirCadeteria(string[]Fila)
+        {
+            Cadeteria miCadeteria = new Cadeteria();
+
+            miCadeteria.Nombre = Fila[0];
+            miCadeteria.Numero = ulong.Parse(Fila[0]);
+
+            return miCadeteria;
+
         }
 
         public static List<Cadete> ConvertirCadete(List<string[]> Filas)
