@@ -32,7 +32,7 @@ namespace EspacioCadeteria
 
         public void AsignarCadeteAPedido(int idCadete, int idPedido)
         {
-            List<Pedido> pedidosPendientes = listaPedidos.FindAll(p => p.Estado == EnumPedido.Pendiente);
+            List<Pedido> pedidosPendientes = listaPedidos.FindAll(p => p.Estado == EnumPedido.Pendiente && p.Cadete == null);
             Cadete cadeteEncontrando = listaCadetes.Find(c => c.Id == idCadete);
             Pedido pedidoEncontrado = pedidosPendientes.Find(p => p.Nro == idPedido);
             if(cadeteEncontrando != null)
