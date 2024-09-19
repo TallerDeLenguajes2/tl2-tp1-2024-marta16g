@@ -38,6 +38,7 @@ namespace EspacioGestion
             Console.WriteLine("2) Asignar pedido a cadete");
             Console.WriteLine("3) Reasignar pedido a cadete");
             Console.WriteLine("4) Cambiar estado de pedido");
+            Console.WriteLine("5) Salir del sistema");
         }
 
         // public void ManejoDeOperaciones(int operacion)
