@@ -11,13 +11,13 @@ namespace EspacioGestion
         const string rutaPedidos = "csv/Pedidos.csv";
         const string rutaCadetes = "csv/Cadetes.csv";
         const string rutaCadeteria = "csv/Cadeteria.csv";
-        Cadeteria miCadeteria = FuncionesCsv.ConvertirCadeteria(FuncionesCsv.LeerArchivos(rutaCadeteria, ','));
-        List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos(rutaCadetes, ','));
+        // Cadeteria miCadeteria = FuncionesCsv.ConvertirCadeteria(FuncionesCsv.LeerArchivos(rutaCadeteria, ','));
+        // List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos(rutaCadetes, ','));
 
-        public void Inicializar()
-        {
-            miCadeteria.ListaCadetes = listaCadetes;
-        }
+        // public void Inicializar()
+        // {
+        //     miCadeteria.ListaCadetes = listaCadetes;
+        // }
 
         public static int ValidarEntrada(string input, int min, int max)
         {

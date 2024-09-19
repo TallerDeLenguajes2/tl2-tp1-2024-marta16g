@@ -12,6 +12,9 @@ class Program
         // Gestion gestion = new Gestion();
         // gestion.Inicializar();
         Cadeteria miCadeteria = FuncionesCsv.ConvertirCadeteria(FuncionesCsv.LeerArchivos("csv/Cadeteria.csv", ','));
+        List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("csv/Cadetes.csv", ','));
+        miCadeteria.ListaCadetes = listaCadetes;
+
         Console.WriteLine("BIENVENIDO");
         Console.WriteLine($"----Cadetería: {miCadeteria.Nombre}, {miCadeteria.Numero}----");
 
