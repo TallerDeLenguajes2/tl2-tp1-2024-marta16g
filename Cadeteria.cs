@@ -29,5 +29,25 @@ namespace EspacioCadeteria
             List<Pedido> pedidosDelCadete = pedidosEntregados.FindAll(p => p.Cadete.Id == idCadete);
             return 500 * pedidosDelCadete.Count;
         }
+
+        public void AsignarCadeteAPedido(int idCadete, int idPedido)
+        {
+            List<Pedido> pedidosPendientes = listaPedidos.FindAll(p => p.Estado == EnumPedido.Pendiente);
+            Cadete cadeteEncontrando = listaCadetes.Find(c => c.Id == idCadete);
+            Pedido pedidoEncontrado = pedidosPendientes.Find(p => p.Nro == idPedido);
+            if(cadeteEncontrando != null)
+            {
+                if(pedidoEncontrado != null)
+                {
+                    pedidoEncontrado.Cadete = cadeteEncontrando;
+                    Console.WriteLine("Asignación exitosa");
+                }else{
+                    Console.WriteLine("El pedido no fue encontrado");
+                }
+            }else
+            {
+                Console.WriteLine("El cadete no fue encontrado");
+            }
+        }
     }
 }
