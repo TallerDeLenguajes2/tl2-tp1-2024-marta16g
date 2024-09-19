@@ -31,7 +31,7 @@ namespace EspacioGestion
             }
 
         }
-        public void MostrarMenu()
+        public static void MostrarMenu()
         {
             Console.WriteLine("MENÚ");
             Console.WriteLine("1) Dar de alta pedidos");
@@ -40,27 +40,27 @@ namespace EspacioGestion
             Console.WriteLine("4) Cambiar estado de pedido");
         }
 
-        public void ManejoDeOperaciones(int operacion)
-        {
-            switch (operacion)
-            {
-                case 1:
-                    DarDeAltaPedido();
-                    break;
-                case 2:
-                    AsignarPedidoACadete();
-                    break;
-                case 3:
-                    ReasignarPedidoACadete();
-                    break;
-                case 4:
-                    CambiarEstadoAPedido();
-                    break;
-            }
+        // public void ManejoDeOperaciones(int operacion)
+        // {
+        //     switch (operacion)
+        //     {
+        //         case 1:
+        //             DarDeAltaPedido();
+        //             break;
+        //         case 2:
+        //             AsignarPedidoACadete();
+        //             break;
+        //         case 3:
+        //             ReasignarPedidoACadete();
+        //             break;
+        //         case 4:
+        //             CambiarEstadoAPedido();
+        //             break;
+        //     }
 
-        }
+        // }
 
-        public void DarDeAltaPedido()
+        public static void DarDeAltaPedido()
         {
             Console.WriteLine("Operación: Dar de alta un pedido");
             Console.WriteLine("Escriba el nombre del cliente");
@@ -92,7 +92,7 @@ namespace EspacioGestion
 
         }
 
-        public void AsignarPedidoACadete()
+        public static void AsignarPedidoACadete(Cadeteria miCadeteria)
         {
             List<Pedido> listaPedidos = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos(rutaPedidos, ','));
 
@@ -122,7 +122,7 @@ namespace EspacioGestion
             }
         }
 
-        public void ReasignarPedidoACadete()
+        public static void ReasignarPedidoACadete(Cadeteria miCadeteria)
         {
             Console.WriteLine("Operación: Reasignar pedido a cadete");
             Console.WriteLine("Escriba el id del cadete cuyo pedido quiere mover");
@@ -151,7 +151,7 @@ namespace EspacioGestion
                 }
             }
         }
-        public void CambiarEstadoAPedido()
+        public static void CambiarEstadoAPedido()
         {
             Console.WriteLine("Operación: Cambiar estado del pedido");
             Console.WriteLine("Ingrese id del pedido");
@@ -179,7 +179,7 @@ namespace EspacioGestion
 
             }
         }
-        public void VerPedidos()
+        public static void VerPedidos()
         {
             List<string[]> listaPedidos = new();
             listaPedidos = FuncionesCsv.LeerArchivos(rutaPedidos, ',');
@@ -191,7 +191,7 @@ namespace EspacioGestion
                 }
             }
         }
-        public void VerCadetes()
+        public static void VerCadetes()
         {
             List<Cadete> listaCadetes = new();
             listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos(rutaCadetes, ','));
