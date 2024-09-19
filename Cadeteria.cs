@@ -22,5 +22,12 @@ namespace EspacioCadeteria
             this.listaCadetes = new();
             this.listaPedidos = new();
         }
+
+        public float JornalACobrar(int idCadete)
+        {
+            List<Pedido> pedidosEntregados = listaPedidos.FindAll(p => p.Estado == EnumPedido.Completado);
+            List<Pedido> pedidosDelCadete = pedidosEntregados.FindAll(p => p.Cadete.Id == idCadete);
+            return 500 * pedidosDelCadete.Count;
+        }
     }
 }
