@@ -31,13 +31,12 @@ namespace EspacioPedido
             $"Dirección: {this.VerDireccionCliente()}");
         }
 
-        public Pedido(int nro, string obs, string nombre, ulong telefono, string direccion, string datosReferenciaDireccion, EnumPedido estado, Cadete cadete)
+        public Pedido(int nro, string obs, string nombre, ulong telefono, string direccion, string datosReferenciaDireccion, EnumPedido estado)
         {
             this.nro = nro;
             this.obs = obs;
             this.cliente = new Cliente(nombre, telefono, direccion, datosReferenciaDireccion);
-            this.estado = estado; 
-            this.Cadete = cadete;
+            this.estado = estado;
         }
     }
     public enum EnumPedido

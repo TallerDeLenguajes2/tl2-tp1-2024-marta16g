@@ -16,7 +16,7 @@ namespace EspacioCadete
         public ulong Telefono { get => telefono; set => telefono = value; }
         
 
-        
+        public Cadete(){}
 
         public Cadete(int id, string nombre, string direccion, ulong telefono)
         {

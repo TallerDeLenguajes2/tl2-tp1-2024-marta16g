@@ -9,11 +9,16 @@ class Program
 {
     private static void Main(string[] args)
     {
-        Cadeteria miCadeteria = FuncionesCsv.ConvertirCadeteria(FuncionesCsv.LeerArchivos("csv/Cadeteria.csv", ','));
-        List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos("csv/Cadetes.csv", ','));
-        List<Pedido> listaPedidos = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos("csv/Pedidos.csv", ','));
+        const string rutaCadeteria = "csv/Cadeteria.csv";
+        const string rutaCadetes = "csv/Cadetes.csv";
+        const string rutaPedidos = "csv/Pedidos.csv";
+
+        Cadeteria miCadeteria = FuncionesCsv.ConvertirCadeteria(FuncionesCsv.LeerArchivos(rutaCadeteria, ','));
+        List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos(rutaCadetes, ','));
+        List<Pedido> listaPedidos = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos(rutaPedidos, ','));
 
         miCadeteria.ListaCadetes = listaCadetes;
+        miCadeteria.ListaPedidos = listaPedidos;
 
         Console.WriteLine("BIENVENIDO");
         Console.WriteLine($"----Cadetería: {miCadeteria.Nombre}, {miCadeteria.Numero}----");
@@ -33,19 +38,24 @@ class Program
             switch (operacion)
             {
                 case 1:
-                    Gestion.DarDeAltaPedido();
+                    Gestion.DarDeAltaPedido(listaPedidos, rutaPedidos);
                     break;
                 case 2:
-                    Gestion.AsignarPedidoACadete(miCadeteria, listaPedidos, listaCadetes);
+                    Console.WriteLine("Ingrese el id del cadete");
+                    int idCadete = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Ingrese el id del pedido");
+                    int idPedido = int.Parse(Console.ReadLine());
+                    miCadeteria.AsignarCadeteAPedido(idCadete, idPedido);
                     break;
                 case 3:
-                    Gestion.ReasignarPedidoACadete(miCadeteria, listaCadetes);
+                    miCadeteria.ReasignarCadeteAPedido(miCadeteria);
                     break;
                 case 4:
-                    Gestion.CambiarEstadoAPedido();
+                    Gestion.CambiarEstadoAPedido(rutaPedidos);
                     break;
-                case 5: Gestion.MostrarInforme(miCadeteria, listaPedidos);
-                break;
+                case 5:
+                    Gestion.MostrarInforme(miCadeteria, listaPedidos);
+                    break;
                 case 6:
                     Console.WriteLine("Nos vemos!");
                     return;
