@@ -5,10 +5,11 @@ using System.Text;
 using EspacioPedido;
 using EspacioCadete;
 using EspacioCadeteria;
+using EspacioAccesoADatos;
 
-namespace EspacioFuncionesCsv
+namespace EspacioAccesoCSV
 {
-    public class FuncionesCsv
+    public class AccesoCSV
     {
         public static List<string[]> LeerArchivos(string nombreArchivo, char caracter)
         {
@@ -83,7 +84,7 @@ namespace EspacioFuncionesCsv
             {
                 foreach (var pedido in pedidos)
                 {
-                    string linea = FuncionesCsv.CrearLineaDePedidos(pedido);
+                    string linea = AccesoCSV.CrearLineaDePedidos(pedido);
                     sw.WriteLine(linea);
                 }
             }

@@ -1,7 +1,7 @@
 using System;
 using EspacioCadete;
 using EspacioCadeteria;
-using EspacioFuncionesCsv;
+using EspacioAccesoCSV;
 using EspacioPedido;
 
 namespace EspacioGestion
@@ -57,7 +57,7 @@ namespace EspacioGestion
 
                 Pedido nuevoPedido = new Pedido(ultimoNum + 1, observacion, nombre, ulong.Parse(telefono), direccion, detalles, EnumPedido.Pendiente);
 
-                FuncionesCsv.AgregarLinea(rutaPedidos, FuncionesCsv.CrearLineaDePedidos(nuevoPedido));
+                AccesoCSV.AgregarLinea(rutaPedidos, AccesoCSV.CrearLineaDePedidos(nuevoPedido));
                 Console.WriteLine("Pedido dado en alta exitosamente");
             }
 
@@ -71,7 +71,7 @@ namespace EspacioGestion
             Console.WriteLine("Ingrese id del pedido");
             string id = Console.ReadLine();
 
-            List<Pedido> listaPedidos = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos(rutaPedidos, ','));
+            List<Pedido> listaPedidos = AccesoCSV.ConvertirPedidos(AccesoCSV.LeerArchivos(rutaPedidos, ','));
             Pedido pedidoEncontrado = listaPedidos.Find(ped => ped.Nro == int.Parse(id));
             if (pedidoEncontrado == null)
             {
@@ -88,7 +88,7 @@ namespace EspacioGestion
                 } while (estadoNum < 1 || estadoNum > 4);
                 pedidoEncontrado.Estado = (EnumPedido)estadoNum;
 
-                FuncionesCsv.ReescribirArchivoCsv(listaPedidos, rutaPedidos);
+                AccesoCSV.ReescribirArchivoCsv(listaPedidos, rutaPedidos);
                 Console.WriteLine("Estado modificado exitosamente");
 
             }

@@ -2,7 +2,7 @@
 using EspacioCadeteria;
 using EspacioCliente;
 using EspacioPedido;
-using EspacioFuncionesCsv;
+using EspacioAccesoCSV;
 using EspacioGestion;
 
 class Program
@@ -13,9 +13,9 @@ class Program
         const string rutaCadetes = "csv/Cadetes.csv";
         const string rutaPedidos = "csv/Pedidos.csv";
 
-        Cadeteria miCadeteria = FuncionesCsv.ConvertirCadeteria(FuncionesCsv.LeerArchivos(rutaCadeteria, ','));
-        List<Cadete> listaCadetes = FuncionesCsv.ConvertirCadete(FuncionesCsv.LeerArchivos(rutaCadetes, ','));
-        List<Pedido> listaPedidos = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos(rutaPedidos, ','));
+        Cadeteria miCadeteria = AccesoCSV.ConvertirCadeteria(AccesoCSV.LeerArchivos(rutaCadeteria, ','));
+        List<Cadete> listaCadetes = AccesoCSV.ConvertirCadete(AccesoCSV.LeerArchivos(rutaCadetes, ','));
+        List<Pedido> listaPedidos = AccesoCSV.ConvertirPedidos(AccesoCSV.LeerArchivos(rutaPedidos, ','));
 
         miCadeteria.ListaCadetes = listaCadetes;
         miCadeteria.ListaPedidos = listaPedidos;
