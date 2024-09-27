@@ -1,0 +1,20 @@
+[
+    {
+        "Id": 1,
+        "Nombre": "Victor Krum",
+        "Direccion": "Rivadavia 601",
+        "Telefono": 3459290
+    },
+    {
+        "Id": 2,
+        "Nombre": "Sara Jara",
+        "Direccion": "Loro Huasi 23",
+        "Telefono": 999999
+    },
+    {
+        "Id": 3,
+        "Nombre": "Pablo Espinosa",
+        "Direccion": "Chacabuco 70",
+        "Telefono": 111111
+    }
+]

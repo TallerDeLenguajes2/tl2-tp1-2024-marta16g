@@ -1,0 +1,79 @@
+[
+    {
+        "Nro": 1,
+        "Obs": "El perro muerde",
+        "Cliente":{
+            "Nombre": "Juan Perez",
+            "Telefono": 1234567890,
+            "Direccion": "Calle Falsa 123",
+            "DatosReferenciaDireccion": "Auto rojo estacionado"
+        },
+        "Estado": 1
+    },
+    {
+        "Nro": 2,
+        "Obs": "Orden Urgente",
+        "Cliente":{
+            "Nombre": "Ana Gomez",
+            "Telefono": 9876543210,
+            "Direccion": "Avenida Siempre Viva 742",
+            "DatosReferenciaDireccion": "Piso 2 Apartamento 4"
+        },
+        "Estado": 3
+    },
+    {
+        "Nro": 3,
+        "Obs": "Requiere confirmación de pago",
+        "Cliente":{
+            "Nombre": "Pablo Martinez",
+            "Telefono": 5647382910,
+            "Direccion": "Calle Luna 56",
+            "DatosReferenciaDireccion": "Portón blanco"
+        },
+        "Estado": 1
+    },
+    {
+        "Nro": 4,
+        "Obs": "Paga en efectivo",
+        "Cliente":{
+            "Nombre": "Laura Sanchez",
+            "Telefono": 1029384756,
+            "Direccion": "Calle Sol 789",
+            "DatosReferenciaDireccion": "A la vuelta del gomez pardo"
+        },
+        "Estado": 1
+    },
+    {
+        "Nro": 5,
+        "Obs": "No tiene cambio",
+        "Cliente":{
+            "Nombre": "Juan Pedro",
+            "Telefono": 123455555,
+            "Direccion": "Mexico 666",
+            "DatosReferenciaDireccion": "Peluquería"
+        },
+        "Estado": 4
+    },
+    {
+        "Nro": 6,
+        "Obs": "Es canje",
+        "Cliente":{
+            "Nombre": "Julián Álvarez",
+            "Telefono": 444444,
+            "Direccion": "Junín 780",
+            "DatosReferenciaDireccion": "Departamento 16d"
+        },
+        "Estado": 1
+    },
+    {
+        "Nro": 7,
+        "Obs": "No paga, es Susana Gimenez",
+        "Cliente":{
+            "Nombre": "Susana Gimenez",
+            "Telefono": 3333333,
+            "Direccion": "Furrero 390",
+            "DatosReferenciaDireccion": "Tiene portón azul fosforecente"
+        },
+        "Estado": 1
+    }
+]
