@@ -9,9 +9,14 @@ class Program
 {
     private static void Main(string[] args)
     {
-        const string rutaCadeteria = "csv/Cadeteria.csv";
-        const string rutaCadetes = "csv/Cadetes.csv";
-        const string rutaPedidos = "csv/Pedidos.csv";
+        const string rutaCadeteriaCsv = "csv/Cadeteria.csv";
+        const string rutaCadetesCsv = "csv/Cadetes.csv";
+        const string rutaPedidosCsv = "csv/Pedidos.csv";
+        const string rutaCadeteriaJson = "json/Cadeteria.json";
+        const string rutaCadetesJson = "json/Cadetes.json";
+        const string rutaPedidosJson = "json/Pedidos.json";
+
+
 
         Cadeteria cadeteria = new();
         List<Cadete> listaCadetes = new();
@@ -23,17 +28,17 @@ class Program
         void AsignarCsv()
         {
             AccesoCSV accesoCsv = new();
-            cadeteria = accesoCsv.ConvertirCadeteria(rutaCadeteria, rutaCadetes, rutaPedidos);
-            listaCadetes = accesoCsv.ConvertirCadetes(rutaCadetes);
-            listaPedidos = accesoCsv.ConvertirPedidos(rutaPedidos);
+            cadeteria = accesoCsv.ConvertirCadeteria(rutaCadeteriaCsv, rutaCadetesCsv, rutaPedidosCsv);
+            listaCadetes = accesoCsv.ConvertirCadetes(rutaCadetesCsv);
+            listaPedidos = accesoCsv.ConvertirPedidos(rutaPedidosCsv);
         }
 
         void AsignarJson()
         {
             AccesoJSON accesoJson = new();
-            cadeteria = accesoJson.ConvertirCadeteria(rutaCadeteria, rutaCadetes, rutaPedidos);
-            listaCadetes = accesoJson.ConvertirCadetes(rutaCadetes);
-            listaPedidos = accesoJson.ConvertirPedidos(rutaPedidos);
+            cadeteria = accesoJson.ConvertirCadeteria(rutaCadeteriaJson, rutaCadetesJson, rutaPedidosJson);
+            listaCadetes = accesoJson.ConvertirCadetes(rutaCadetesJson);
+            listaPedidos = accesoJson.ConvertirPedidos(rutaPedidosJson);
         }
 
         void AsignarArchivos()
@@ -76,7 +81,7 @@ class Program
             {
                 case 1:
                     AsignarArchivos(); //Para actualizar datos que fueron reescritos en los archivos
-                    Gestion.DarDeAltaPedido(listaPedidos, rutaPedidos);
+                    Gestion.DarDeAltaPedido(listaPedidos, rutaPedidosCsv);
                     break;
                 case 2:
                     Console.WriteLine("Ingrese el id del cadete");
@@ -90,7 +95,7 @@ class Program
                     cadeteria.ReasignarCadeteAPedido(cadeteria);
                     break;
                 case 4:
-                    Gestion.CambiarEstadoAPedido(rutaPedidos);
+                    Gestion.CambiarEstadoAPedido(rutaPedidosCsv);
                     break;
                 case 5:
                     AsignarArchivos(); //Para actualizar datos que fueron reescritos en los archivos
