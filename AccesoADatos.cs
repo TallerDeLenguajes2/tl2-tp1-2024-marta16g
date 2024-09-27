@@ -9,7 +9,7 @@ namespace EspacioAccesoADatos
     public abstract class AccesoADatos
     {
         public abstract List<Cadete> ConvertirCadetes(string nombreArchivo);
-        public abstract Cadeteria ConvertirCadeteria(string nombreArchivo);
+        public abstract Cadeteria ConvertirCadeteria(string nombreCadeteria, string nombreCadetes, string nombrePedidos);
         public abstract List<Pedido> ConvertirPedidos(string nombreArchivo);
     }
     public class AccesoCSV : AccesoADatos
@@ -33,17 +33,17 @@ namespace EspacioAccesoADatos
         }
 
 
-        public override Cadeteria ConvertirCadeteria(string nombreArchivo)
+        public override Cadeteria ConvertirCadeteria(string nombreCadeteria, string nombreCadetes, string nombrePedidos)
         {
             Cadeteria miCadeteria = new Cadeteria();
-            List<string[]> fila = LeerCsv(nombreArchivo, ',');
+            List<string[]> fila = LeerCsv(nombreCadeteria, ',');
             foreach (string[] i in fila)
             {
                 miCadeteria.Nombre = i[0];
                 miCadeteria.Numero = ulong.Parse(i[1]);
             }
-            miCadeteria.ListaCadetes = ConvertirCadetes(nombreArchivo);
-            miCadeteria.ListaPedidos = ConvertirPedidos(nombreArchivo);
+            miCadeteria.ListaCadetes = ConvertirCadetes(nombreCadetes);
+            miCadeteria.ListaPedidos = ConvertirPedidos(nombrePedidos);
             return miCadeteria;
         }
         public override List<Cadete> ConvertirCadetes(string nombreArchivo)
@@ -69,6 +69,33 @@ namespace EspacioAccesoADatos
 
             return misPedidos;
         }
+        public static string CrearLineaDePedidos(Pedido pedido)
+        {
+            string linea = $"{pedido.Nro.ToString()},{pedido.Obs},{pedido.Cliente.Nombre},{pedido.Cliente.Telefono.ToString()},{pedido.Cliente.Direccion},{pedido.Cliente.DatosReferenciaDireccion},{pedido.Estado.ToString()}";
+            return linea;
+        }
+        public static void ReescribirArchivoCsv(List<Pedido> pedidos, string nombreArchivo)
+        {
+            using (StreamWriter sw = new StreamWriter(nombreArchivo, false))
+            {
+                foreach (var pedido in pedidos)
+                {
+                    string linea = CrearLineaDePedidos(pedido);
+                    sw.WriteLine(linea);
+                }
+            }
+        }
+
+        public static void AgregarLinea(string nombreArchivo, string linea)
+        {
+            using (FileStream miArchivo = new FileStream(nombreArchivo, FileMode.Append, FileAccess.Write))
+            {
+                using (StreamWriter escritor = new StreamWriter(miArchivo))
+                {
+                    escritor.WriteLine(linea);
+                }
+            }
+        }
     }
 
     public class AccesoJSON : AccesoADatos
@@ -85,14 +112,14 @@ namespace EspacioAccesoADatos
             }
             return documento;
         }
-        public override Cadeteria ConvertirCadeteria(string nombreArchivo)
+        public override Cadeteria ConvertirCadeteria(string nombreCadeteria, string nombreCadetes, string nombrePedidos)
         {
             Cadeteria miCadeteria = new Cadeteria();
-            string documentoJson = LeerJson(nombreArchivo);
+            string documentoJson = LeerJson(nombreCadeteria);
             miCadeteria = JsonSerializer.Deserialize<Cadeteria>(documentoJson);
-            miCadeteria.ListaCadetes = ConvertirCadetes(nombreArchivo);
-            miCadeteria.ListaPedidos = ConvertirPedidos(nombreArchivo);
-            
+            miCadeteria.ListaCadetes = ConvertirCadetes(nombreCadetes);
+            miCadeteria.ListaPedidos = ConvertirPedidos(nombrePedidos);
+
             return miCadeteria;
         }
         public override List<Cadete> ConvertirCadetes(string nombreArchivo)

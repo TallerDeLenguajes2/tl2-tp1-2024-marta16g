@@ -24,8 +24,9 @@ namespace EspacioCadeteria
             this.listaPedidos = new();
         }
 
-        public float JornalACobrar(int idCadete)
+        public float JornalACobrar(int idCadete, List<Pedido> listaPedidos)
         {
+            
             List<Pedido> pedidosEntregados = listaPedidos.FindAll(p => p.Estado == EnumPedido.Completado);
             List<Pedido> pedidosDelCadete = pedidosEntregados.FindAll(p => (p.Cadete != null && p.Cadete.Id == idCadete));
             if (pedidosDelCadete != null && pedidosEntregados != null)
@@ -37,7 +38,7 @@ namespace EspacioCadeteria
             }
         }
 
-        public void AsignarCadeteAPedido(int idCadete, int idPedido)
+        public void AsignarCadeteAPedido(int idCadete, int idPedido, List<Pedido> listaPedidos)
         {
             List<Pedido> pedidosPendientes = listaPedidos.FindAll(p => p.Estado == EnumPedido.Pendiente && p.Cadete == null);
             Cadete cadeteEncontrado = listaCadetes.Find(c => c.Id == idCadete);

@@ -1,8 +1,9 @@
 using System;
 using EspacioCadete;
 using EspacioCadeteria;
-using EspacioAccesoCSV;
+// using EspacioAccesoCSV;
 using EspacioPedido;
+using EspacioAccesoADatos;
 
 namespace EspacioGestion
 {
@@ -46,7 +47,6 @@ namespace EspacioGestion
             string observacion = Console.ReadLine();
 
 
-            // List<Pedido> pedidosCsv = FuncionesCsv.ConvertirPedidos(FuncionesCsv.LeerArchivos(rutaPedidos, ','));
             if (listaPedidos == null || listaPedidos.Count == 0)
             {
                 Console.WriteLine("viene vacío");
@@ -67,11 +67,12 @@ namespace EspacioGestion
 
         public static void CambiarEstadoAPedido(string rutaPedidos)
         {
+            AccesoCSV accesoCsv = new AccesoCSV();
             Console.WriteLine("Operación: Cambiar estado del pedido");
             Console.WriteLine("Ingrese id del pedido");
             string id = Console.ReadLine();
 
-            List<Pedido> listaPedidos = AccesoCSV.ConvertirPedidos(AccesoCSV.LeerArchivos(rutaPedidos, ','));
+            List<Pedido> listaPedidos = accesoCsv.ConvertirPedidos(rutaPedidos);
             Pedido pedidoEncontrado = listaPedidos.Find(ped => ped.Nro == int.Parse(id));
             if (pedidoEncontrado == null)
             {
@@ -90,7 +91,6 @@ namespace EspacioGestion
 
                 AccesoCSV.ReescribirArchivoCsv(listaPedidos, rutaPedidos);
                 Console.WriteLine("Estado modificado exitosamente");
-
             }
         }
         public static void MostrarInforme(Cadeteria miCadeteria, List<Pedido> listaPedidos)
@@ -105,10 +105,8 @@ namespace EspacioGestion
             int cantEnvios = 0;
             foreach (var cad in miCadeteria.ListaCadetes)
             {
-                float jornalCadete = miCadeteria.JornalACobrar(cad.Id);
+                float jornalCadete = miCadeteria.JornalACobrar(cad.Id, listaPedidos);
                 Console.WriteLine($"Jornal del cadete {cad.Nombre}: ${totalMonto}");
-                // Console.WriteLine($"Cantidad de envíos del cadete {cad.Nombre}: {cantEnvios}");
-                // cantEnvios = 0;
                 totalMonto += jornalCadete;
             }
 
