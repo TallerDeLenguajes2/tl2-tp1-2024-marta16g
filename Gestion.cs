@@ -21,18 +21,12 @@ namespace EspacioGestion
             }
 
         }
-        public static void MostrarMenu()
+        public static string MostrarMenu()
         {
-            Console.WriteLine("MENÚ");
-            Console.WriteLine("1) Dar de alta pedidos");
-            Console.WriteLine("2) Asignar pedido a cadete");
-            Console.WriteLine("3) Reasignar pedido a cadete");
-            Console.WriteLine("4) Cambiar estado de pedido");
-            Console.WriteLine("5) Ver informe");
-            Console.WriteLine("6) Salir del sistema");
+            return ("MENÚ \n 1) Dar de alta pedidos \n 2) Asignar pedido a cadete \n 3) Reasignar pedido a cadete \n 4) Cambiar estado de pedido \n 5) Ver informe \n 6) Salir del sistema \n");
         }
 
-        public static void DarDeAltaPedido(List<Pedido> listaPedidos, string rutaPedidos)
+        public static bool DarDeAltaPedido(List<Pedido> listaPedidos, string rutaPedidos)
         {
             Console.WriteLine("Operación: Dar de alta un pedido");
             Console.WriteLine("Escriba el nombre del cliente");
@@ -49,7 +43,8 @@ namespace EspacioGestion
 
             if (listaPedidos == null || listaPedidos.Count == 0)
             {
-                Console.WriteLine("viene vacío");
+                return false;
+
             }
             else
             {
@@ -58,14 +53,15 @@ namespace EspacioGestion
                 Pedido nuevoPedido = new Pedido(ultimoNum + 1, observacion, nombre, ulong.Parse(telefono), direccion, detalles, EnumPedido.Pendiente);
 
                 AccesoCSV.AgregarLinea(rutaPedidos, AccesoCSV.CrearLineaDePedidos(nuevoPedido));
-                Console.WriteLine("Pedido dado en alta exitosamente");
+                return true;
+
             }
 
         }
 
 
 
-        public static void CambiarEstadoAPedido(string rutaPedidos)
+        public static bool CambiarEstadoAPedido(string rutaPedidos)
         {
             AccesoCSV accesoCsv = new AccesoCSV();
             Console.WriteLine("Operación: Cambiar estado del pedido");
@@ -76,7 +72,8 @@ namespace EspacioGestion
             Pedido pedidoEncontrado = listaPedidos.Find(ped => ped.Nro == int.Parse(id));
             if (pedidoEncontrado == null)
             {
-                Console.WriteLine("No se pudo encontrar el pedido");
+                return false;
+
             }
             else
             {
@@ -90,17 +87,25 @@ namespace EspacioGestion
                 pedidoEncontrado.Estado = (EnumPedido)estadoNum;
 
                 AccesoCSV.ReescribirArchivoCsv(listaPedidos, rutaPedidos);
-                Console.WriteLine("Estado modificado exitosamente");
+                return true;
+
             }
         }
-        public static void MostrarInforme(Cadeteria miCadeteria, List<Pedido> listaPedidos)
+        public void MostrarInforme(Cadeteria miCadeteria, List<Pedido> listaPedidos)
         {
             Console.WriteLine("Lista de pedidos:");
-            VerPedidos(listaPedidos);
-            Console.WriteLine();
+            List<string> listaTextualDePedidos = VerPedidos(listaPedidos);
+            foreach(string pedido in listaTextualDePedidos)
+            {
+                Console.WriteLine(pedido);
+            }
             Console.WriteLine("Pedidos entregados:");
-            VerPedidos(listaPedidos.FindAll(p => p.Estado == EnumPedido.Completado));
 
+            List<string> pedidosCompletados = VerPedidos(listaPedidos.FindAll(p => p.Estado == EnumPedido.Completado));
+            foreach(string pedido in pedidosCompletados)
+            {
+                Console.WriteLine(pedido);
+            }
             float totalMonto = 0;
             int cantEnvios = 0;
             foreach (var cad in miCadeteria.ListaCadetes)
@@ -112,26 +117,34 @@ namespace EspacioGestion
 
             Console.WriteLine($"Monto total ganado: ${totalMonto}");
         }
-        public static void VerPedidos(List<Pedido> listaPedidos)
+        public List<string> VerPedidos(List<Pedido> listaPedidos)
         {
+            List<string> listaTextualDePedidos = new();
             for (int i = 0; i < listaPedidos.Count; i++)
             {
-                Console.WriteLine($"PEDIDO NÚMERO {i + 1}");
-                Console.WriteLine($"ID: {listaPedidos[i].Nro}");
-                Console.WriteLine($"Cliente: {listaPedidos[i].Cliente.Nombre}, {listaPedidos[i].Cliente.Direccion}");
+                string lineaPedidoCadete = "";
                 if (listaPedidos[i].Cadete != null)
                 {
-                    Console.WriteLine($"Pedido del cadete: {listaPedidos[i].Cadete.Nombre} de id {listaPedidos[i].Cadete.Id}");
+                    lineaPedidoCadete = $"Pedido a cargo de: {listaPedidos[i].Cadete.Nombre} de id {listaPedidos[i].Cadete.Id}";
+                }else{
+                    lineaPedidoCadete = "Sin cadete a cargo";
                 }
+                string lineai = $"PEDIDO NÚMERO {i + 1}/n ID: {listaPedidos[i].Nro}\n Cliente: {listaPedidos[i].Cliente.Nombre}, {listaPedidos[i].Cliente.Direccion} \n {lineaPedidoCadete}";
+                listaTextualDePedidos.Add(lineai);
             }
+
+            return listaTextualDePedidos;
         }
-        public static void VerCadetes(List<Cadete> listaCadetes)
+        public static List<string> VerCadetes(List<Cadete> listaCadetes)
         {
+            List<string> listaTextualInfoCadetes = new();
             foreach (Cadete cad in listaCadetes)
             {
-                Console.WriteLine($"--CADETE {cad.Id}--\n Nombre: {cad.Nombre} \n Teléfono: {cad.Telefono} \n Dirección: {cad.Direccion}");
-                Console.WriteLine();
+                string linea = $"--CADETE {cad.Id}--\n Nombre: {cad.Nombre} \n Teléfono: {cad.Telefono} \n Dirección: {cad.Direccion}\n";
+                listaTextualInfoCadetes.Add(linea);
             }
+
+            return listaTextualInfoCadetes;
         }
 
     }

@@ -26,19 +26,20 @@ namespace EspacioCadeteria
 
         public float JornalACobrar(int idCadete, List<Pedido> listaPedidos)
         {
-            
+
             List<Pedido> pedidosEntregados = listaPedidos.FindAll(p => p.Estado == EnumPedido.Completado);
             List<Pedido> pedidosDelCadete = pedidosEntregados.FindAll(p => (p.Cadete != null && p.Cadete.Id == idCadete));
             if (pedidosDelCadete != null && pedidosEntregados != null)
             {
                 return 500 * pedidosDelCadete.Count;
-            }else
+            }
+            else
             {
                 return 0;
             }
         }
 
-        public void AsignarCadeteAPedido(int idCadete, int idPedido, List<Pedido> listaPedidos)
+        public bool AsignarCadeteAPedido(int idCadete, int idPedido, List<Pedido> listaPedidos)
         {
             List<Pedido> pedidosPendientes = listaPedidos.FindAll(p => p.Estado == EnumPedido.Pendiente && p.Cadete == null);
             Cadete cadeteEncontrado = listaCadetes.Find(c => c.Id == idCadete);
@@ -48,21 +49,21 @@ namespace EspacioCadeteria
                 if (pedidoEncontrado != null)
                 {
                     pedidoEncontrado.Cadete = cadeteEncontrado;
-                    Console.WriteLine("Asignación exitosa");
-                    Console.WriteLine($"Se asignó el pedido de {pedidoEncontrado.Cliente.Nombre} al cadete {cadeteEncontrado.Nombre}");
+                    return true;
                 }
                 else
                 {
-                    Console.WriteLine("El pedido no fue encontrado");
+                    return false;
                 }
             }
             else
             {
-                Console.WriteLine("El cadete no fue encontrado");
+                return false;
+
             }
         }
 
-        public void ReasignarCadeteAPedido(Cadeteria miCadeteria)
+        public bool ReasignarCadeteAPedido(Cadeteria miCadeteria)
         {
             Console.WriteLine("Operación: Reasignar pedido a cadete");
             Console.WriteLine("MOSTRANDO CADETES Y SUS PEDIDOS");
@@ -83,21 +84,22 @@ namespace EspacioCadeteria
                     if (cadete2 != null)
                     {
                         pedidoEncontrado.Cadete = cadete2;
-                        Console.WriteLine($"Reasignación exitosa. El cadete del pedido número {pedidoEncontrado.Nro} es {pedidoEncontrado.Cadete.Nombre}");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("No se encontró el segundo cadete");
+                        return false;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No se encontró el pedido che");
+                    return false;
                 }
             }
             else
             {
-                Console.WriteLine("No se encontró el cadete");
+                return false;
+
             }
         }
     }

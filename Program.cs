@@ -22,6 +22,8 @@ class Program
         List<Cadete> listaCadetes = new();
         List<Pedido> listaPedidos = new();
 
+        Gestion gestion = new();
+
         Console.WriteLine("Elija que tipo de archivo utilizar para traer los datos: 1) CSV, 2) JSON");
         int tipoArchivo = int.Parse(Console.ReadLine());
         AsignarArchivos();
@@ -81,7 +83,14 @@ class Program
             {
                 case 1:
                     AsignarArchivos(); //Para actualizar datos que fueron reescritos en los archivos
-                    Gestion.DarDeAltaPedido(listaPedidos, rutaPedidosCsv);
+                    bool estado = Gestion.DarDeAltaPedido(listaPedidos, rutaPedidosCsv);
+                    if(estado)
+                    {
+                        Console.WriteLine("Alta de pedido exitosa");
+                    }else
+                    {
+                        Console.WriteLine("¡Oh no! Algo ocurrió mal");
+                    }
                     break;
                 case 2:
                     Console.WriteLine("Ingrese el id del cadete");
@@ -89,17 +98,38 @@ class Program
                     Console.WriteLine("Ingrese el id del pedido");
                     int idPedido = int.Parse(Console.ReadLine());
                     AsignarArchivos(); //Para actualizar datos que fueron reescritos en los archivos
-                    cadeteria.AsignarCadeteAPedido(idCadete, idPedido, listaPedidos);
+                    estado = cadeteria.AsignarCadeteAPedido(idCadete, idPedido, listaPedidos);
+                    if(estado)
+                    {
+                        Console.WriteLine("Asignación exitosa");
+                    }else
+                    {
+                        Console.WriteLine("¡Oh no! Algo ocurrió mal");
+                    }
                     break;
                 case 3:
-                    cadeteria.ReasignarCadeteAPedido(cadeteria);
+                    estado = cadeteria.ReasignarCadeteAPedido(cadeteria);
+                    if(estado)
+                    {
+                        Console.WriteLine("Reasignación exitosa");
+                    }else
+                    {
+                        Console.WriteLine("¡Oh no! Algo ocurrió mal");
+                    }
                     break;
                 case 4:
-                    Gestion.CambiarEstadoAPedido(rutaPedidosCsv);
+                    estado = Gestion.CambiarEstadoAPedido(rutaPedidosCsv);
+                    if(estado)
+                    {
+                        Console.WriteLine("Cambio de estado exitoso");
+                    }else
+                    {
+                        Console.WriteLine("¡Oh no! Algo ocurrió mal");
+                    }
                     break;
                 case 5:
                     AsignarArchivos(); //Para actualizar datos que fueron reescritos en los archivos
-                    Gestion.MostrarInforme(cadeteria, listaPedidos);
+                    gestion.MostrarInforme(cadeteria, listaPedidos);
                     break;
                 case 6:
                     Console.WriteLine("Nos vemos!");
