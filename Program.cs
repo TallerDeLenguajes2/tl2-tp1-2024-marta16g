@@ -98,7 +98,7 @@ class Program
                     Console.WriteLine("Ingrese el id del pedido");
                     int idPedido = int.Parse(Console.ReadLine());
                     AsignarArchivos(); //Para actualizar datos que fueron reescritos en los archivos
-                    estado = cadeteria.AsignarCadeteAPedido(idCadete, idPedido, listaPedidos);
+                    estado = cadeteria.AsignarCadeteAPedido(idCadete, idPedido);
                     if(estado)
                     {
                         Console.WriteLine("Asignación exitosa");
@@ -108,7 +108,7 @@ class Program
                     }
                     break;
                 case 3:
-                    estado = cadeteria.ReasignarCadeteAPedido(cadeteria);
+                    estado = cadeteria.ReasignarCadeteAPedido();
                     if(estado)
                     {
                         Console.WriteLine("Reasignación exitosa");

@@ -110,7 +110,7 @@ namespace EspacioGestion
             int cantEnvios = 0;
             foreach (var cad in miCadeteria.ListaCadetes)
             {
-                float jornalCadete = miCadeteria.JornalACobrar(cad.Id, listaPedidos);
+                float jornalCadete = miCadeteria.JornalACobrar(cad.Id);
                 Console.WriteLine($"Jornal del cadete {cad.Nombre}: ${totalMonto}");
                 totalMonto += jornalCadete;
             }
